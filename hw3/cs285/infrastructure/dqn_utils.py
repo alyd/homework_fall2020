@@ -42,7 +42,7 @@ def get_env_kwargs(env_name):
             'learning_starts': 50000,
             'target_update_freq': 10000,
             'replay_buffer_size': int(1e6),
-            'num_timesteps': int(2e8),
+            'num_timesteps': int(2e6),
             'q_func': create_atari_q_network,
             'learning_freq': 4,
             'grad_norm_clipping': 10,
@@ -99,6 +99,8 @@ class Ipdb(nn.Module):
 
 class PreprocessAtari(nn.Module):
     def forward(self, x):
+        if x.dim() == 3:
+            x = x.unsqueeze(0)
         x = x.permute(0, 3, 1, 2).contiguous()
         return x / 255.
 
@@ -495,7 +497,7 @@ class MemoryOptimizedReplayBuffer(object):
         return ret
 
     def store_effect(self, idx, action, reward, done):
-        """Store effects of action taken after obeserving frame stored
+        """Store effects of action taken after observing frame stored
         at index idx. The reason `store_frame` and `store_effect` is broken
         up into two functions is so that once can call `encode_recent_observation`
         in between.
