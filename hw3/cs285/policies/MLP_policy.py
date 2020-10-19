@@ -3,7 +3,7 @@ import itertools
 from torch import nn
 from torch.nn import functional as F
 from torch import optim
-
+import ipdb
 import numpy as np
 import torch
 from torch import distributions
@@ -130,6 +130,8 @@ class MLPPolicyAC(MLPPolicy):
         # TODO: update the policy and return the loss
         observations = ptu.from_numpy(observations)
         actions = ptu.from_numpy(actions)
+        if adv_n is not None:
+            adv_n = ptu.from_numpy(adv_n)
         action_likelihoods = self.forward(observations)
         weighted_likelihoods = action_likelihoods.log_prob(actions) * adv_n
         loss = -torch.mean(weighted_likelihoods)
@@ -160,7 +162,7 @@ class MLPPolicyPG(MLPPolicy):
         # by the `forward` method
         # HINT3: don't forget that `optimizer.step()` MINIMIZES a loss
         action_likelihoods = self.forward(observations)
-        weighted_likelihoods = action_likelihoods.log_prob(actions) * advantages  # jathu
+        weighted_likelihoods = action_likelihoods.log_prob(actions) * advantages
         loss = -torch.mean(weighted_likelihoods)
         # TODO: optimize `loss` using `self.optimizer`
         # HINT: remember to `zero_grad` first
