@@ -3,7 +3,8 @@ import time
 
 from cs285.infrastructure.rl_trainer import RL_Trainer
 from cs285.agents.mb_agent import MBAgent
-
+import matplotlib
+matplotlib.use('Agg')
 
 class MB_Trainer(object):
 
