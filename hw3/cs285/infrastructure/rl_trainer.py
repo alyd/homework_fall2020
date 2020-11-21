@@ -54,11 +54,8 @@ class RL_Trainer(object):
         self.env = gym.make(self.params['env_name'])
         if 'env_wrappers' in self.params:
             # These operations are currently only for Atari envs
-<<<<<<< HEAD
             # self.env = wrappers.Monitor(self.env, os.path.join(self.params['logdir'], "gym"), force=True)
             # self.env.enabled = (self.params['video_log_freq'] > 0)
-=======
->>>>>>> upstream/master
             self.env = wrappers.Monitor(
                 self.env,
                 os.path.join(self.params['logdir'], "gym"),
@@ -69,11 +66,8 @@ class RL_Trainer(object):
             self.mean_episode_reward = -float('nan')
             self.best_mean_episode_reward = -float('inf')
         if 'non_atari_colab_env' in self.params and self.params['video_log_freq'] > 0:
-<<<<<<< HEAD
             # self.env = wrappers.Monitor(self.env, os.path.join(self.params['logdir'], "gym"), force=True)
             # self.env.enabled = (self.params['video_log_freq'] > 0)
-=======
->>>>>>> upstream/master
             self.env = wrappers.Monitor(
                 self.env,
                 os.path.join(self.params['logdir'], "gym"),
