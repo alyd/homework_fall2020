@@ -45,7 +45,7 @@ def main():
         default='PointmassHard-v0',
         choices=('PointmassEasy-v0', 'PointmassMedium-v0', 'PointmassHard-v0', 'PointmassVeryHard-v0')
     )
-
+    parser.add_argument('--my_exploration',  action='store_true')
     parser.add_argument('--exp_name', type=str, default='todo')
 
     parser.add_argument('--eval_batch_size', type=int, default=1000)
